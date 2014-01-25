@@ -5,13 +5,13 @@
 
 .countdown strong {display: block;}
 @media (min-width: 768px) {
-    .countdown {padding-top: 60px;}
+    .countdown {padding-top: 68px;}
 }
 
 .page-header {
     text-align: center;
     margin-top: 0;
-    padding-bottom: 300px;
+    padding-bottom: 250px;
     margin-bottom: 25px;
 }
 .page-header img {height: 300px;max-width: 100%;}
@@ -23,7 +23,11 @@ form .btn-primary {width: 100%;}
     .form-text br {display: none;}
 }
 
-footer {padding-bottom: 20px}
+.social {
+    margin-top: 40px;
+}
+
+footer {padding-bottom: 20px;}
 footer p {margin: 0;}
-.footer-links {padding: 0;}
-.footer-links li {display: inline; padding: 0 2px;}
+.footer-links, .social-links {padding: 0;}
+.footer-links li, .social-links li {display: inline; padding: 0 2px;}
