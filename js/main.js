@@ -1,17 +1,37 @@
 /* global moment, countdown */
 
-var $c = $('.countdown'),
-    m = moment('2014-03-16T23:00:00.000Z');
-    setTime = function () {
-        var time = m.countdown(
-            new Date(),
-            countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS,
-            NaN,
-            0
-        ).toString();
-        $c.html(time.replace(/, (and )?/g, '<br>'));
-        $('title').text('Tweet Your Bracket | ' + time);
-    };
+(function() {
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame =
+          window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
 
-setTime();
-setInterval(setTime, 1000);
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+
+(function () {
+    var $c = $('.countdown'),
+        m = moment('2014-03-16T23:00:00.000Z'),
+        ms = countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS,
+        updateCountdown = function () {
+            $c.html(m.countdown(new Date(), ms).toHTML('strong').replace(/, (and )?/g, ''));
+            window.requestAnimationFrame(updateCountdown);
+        };
+    window.requestAnimationFrame(updateCountdown);
+})();
