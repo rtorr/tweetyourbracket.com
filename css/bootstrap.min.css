@@ -3,6 +3,7 @@
 
 .navbar {margin-bottom: 0; border-radius: 0;}
 
+.countdown {padding-top: 36px; margin-bottom: 0;}
 .countdown strong {display: block;}
 @media (min-width: 768px) {
     .countdown {padding-top: 68px;}
@@ -15,7 +16,7 @@
     margin-bottom: 25px;
 }
 .page-header img {height: 300px;max-width: 100%;}
-.page-header h1 {margin-top: 0; margin-bottom: 30px;}
+.page-header h1 {margin-top: 0;}
 
 form input {text-align: center;}
 form .btn-primary {width: 100%;}
